@@ -8,20 +8,17 @@ from tkinter import filedialog
 def ask_mainloop_action() -> Literal[
     "list",
     "change_dir",
-    "rename",
     "convert",
     "exit"]:
     returns_dict = {
-        "ls":  "list",
-        "rn": "rename",
+        "ls": "list",
         "cv": "convert",
-        "cd":  "change_dir",
-        "x":   "exit"}
+        "cd": "change_dir",
+        "x":  "exit"}
 
     while True:
         print("Choose action: \n"
-              "ls - List all images in folder\n"
-              "rn - Rename...\n"
+              "ls - List all convertable images in folder\n"
               "cv - Convert...\n"
               "cd - Change program working directory\n"
               "x  - Exit program\n>> ", end="")
