@@ -17,8 +17,8 @@ def main_loop() -> None:
         if action == "list_images":
             prt_routes.list_images_route(dir_main)
 
-        if action == "list_audios":
-            prt_routes.list_audios_route(dir_main)
+        # if action == "list_audios":
+        #     prt_routes.list_audios_route(dir_main)
 
         elif action == "change_dir":
             dir_main = ask_main.ask_path_filedialog("dir", "Choose images directory")

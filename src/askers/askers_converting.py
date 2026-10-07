@@ -3,26 +3,20 @@ from typing import Literal
 
 
 def ask_convert_action() -> Literal[
-        "list_heic",
-        "list_png",
         "heic_to_png",
         "heic_to_jpg",
         "png_to_jpg",
         "return",
         "exit"]:
     returns_dict = {
-        "lh": "list_heic",
-        "lp": "list_png",
         "hp": "heic_to_png",
         "hj": "heic_to_jpg",
         "pj": "png_to_jpg",
-        "rt": "return",
+        "r":  "return",
         "x":  "exit"}
 
     while True:
         print("Choose convert action:\n"
-              "lh - List all .heic files in folder\n"
-              "lp - List all .png files in folder\n"
               "hp - .heic to .png...\n"
               "hj - .heic to .jpg...\n"
               "pj - .png to .jpg...\n"
