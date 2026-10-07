@@ -15,31 +15,26 @@ def convert_loop(dir_path: Path) -> bool:
         action = ask_cnv.ask_convert_action()
         print()
 
-        if action == "list_heic":
-            utils.list_images_in_dir(dir_path, "heic")
-            print("\n")
-
-        elif action == "list_png":
-            utils.list_images_in_dir(dir_path, "png")
-            print("\n")
-
-        elif action == "heic_to_png":
+        if action == "convert_heic":
             print()
-            exit_flag = htp_loop(dir_path)
+            pass
+            exit_flag = conv_heic_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
             print()
 
-        elif action == "heic_to_jpg":
+        elif action == "convert_png":
             print()
-            exit_flag = htj_loop(dir_path)
+            pass
+            exit_flag = conv_png_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
             print()
 
-        elif action == "png_to_jpg":
+        elif action == "convert_jpg":
             print()
-            exit_flag = ptj_loop(dir_path)
+            pass
+            exit_flag = conv_jpg_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
             print()
@@ -48,7 +43,7 @@ def convert_loop(dir_path: Path) -> bool:
             return exit_flags[action]
 
 
-def htp_loop(dir_path: Path) -> bool:
+def conv_heic_loop(dir_path: Path) -> bool:
     exit_flags = {
         "return": False,
         "exit": True}
@@ -73,7 +68,7 @@ def htp_loop(dir_path: Path) -> bool:
             return exit_flags[action]
 
 
-def htj_loop(dir_path: Path) -> bool:
+def conv_png_loop(dir_path: Path) -> bool:
     exit_flags = {
         "return": False,
         "exit": True}
@@ -98,7 +93,7 @@ def htj_loop(dir_path: Path) -> bool:
             return exit_flags[action]
 
 
-def ptj_loop(dir_path: Path) -> bool:
+def conv_jpg_loop(dir_path: Path) -> bool:
     exit_flags = {
         "return": False,
         "exit": True}

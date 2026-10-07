@@ -3,23 +3,23 @@ from typing import Literal
 
 
 def ask_convert_action() -> Literal[
-        "heic_to_png",
-        "heic_to_jpg",
-        "png_to_jpg",
+        "convert_heic",
+        "convert_png",
+        "convert_jpg",
         "return",
         "exit"]:
     returns_dict = {
-        "hp": "heic_to_png",
-        "hj": "heic_to_jpg",
-        "pj": "png_to_jpg",
-        "r":  "return",
-        "x":  "exit"}
+        "h": "convert_heic",
+        "p": "convert_png",
+        "j": "convert_jpg",
+        "r": "return",
+        "x": "exit"}
 
     while True:
         print("Choose convert action:\n"
-              "hp - .heic to .png...\n"
-              "hj - .heic to .jpg...\n"
-              "pj - .png to .jpg...\n"
+              "h - Convert .heic files...\n"
+              "p - Convert .png files...\n"
+              "j - Convert .jpg files...\n"
               "r  - Return\n"
               "x  - Exit program\n>> ", end="")
         action = input().strip().lower()
