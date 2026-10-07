@@ -24,9 +24,6 @@ def main_loop() -> None:
             if not dir_main:
                 return
 
-        elif action == "rename":
-            exit_flag = rnm_routes.rename_actionloop(dir_main)
-
         elif action =="convert":
             print()
             exit_flag = cnv_routes.convert_loop(dir_main)
