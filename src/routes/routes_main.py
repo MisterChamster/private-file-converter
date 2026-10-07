@@ -1,7 +1,6 @@
 import src.askers.askers_main as ask_main
-import src.routes.routes_rename as rnm_routes
 import src.routes.routes_convert as cnv_routes
-import src.utils as utils
+import src.routes.routes_print as prt_routes
 
 
 
@@ -15,9 +14,11 @@ def main_loop() -> None:
         print()
         action = ask_main.ask_mainloop_action()
         print()
-        if action == "list":
-            utils.list_images_in_dir(dir_main)
-            print()
+        if action == "list_images":
+            prt_routes.list_images_route(dir_main)
+
+        if action == "list_audios":
+            prt_routes.list_audios_route(dir_main)
 
         elif action == "change_dir":
             dir_main = ask_main.ask_path_filedialog("dir", "Choose images directory")

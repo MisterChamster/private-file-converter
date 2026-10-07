@@ -26,7 +26,7 @@ def ask_convert_action() -> Literal[
               "hp - .heic to .png...\n"
               "hj - .heic to .jpg...\n"
               "pj - .png to .jpg...\n"
-              "rt - Return\n"
+              "r  - Return\n"
               "x  - Exit program\n>> ", end="")
         action = input().strip().lower()
 
