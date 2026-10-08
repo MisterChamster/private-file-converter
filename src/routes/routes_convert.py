@@ -48,20 +48,16 @@ def conv_heic_loop(dir_path: Path) -> bool:
             utils.list_convable_images_in_dir(dir_path, "heic")
             print()
 
-        elif action == "heic_to_png_no_del":
-            cnv.conv_HEICs_dir(dir_path, "png")
+        elif action == "heic_to_png":
+            del_og = ask_cnv.ask_del_og_files("heic")
+            print()
+            cnv.conv_HEICs_dir(dir_path, "png", del_og)
             print()
 
-        elif action == "heic_to_png_del":
-            cnv.conv_HEICs_dir(dir_path, "png", True)
+        elif action == "heic_to_jpg":
+            del_og = ask_cnv.ask_del_og_files("heic")
             print()
-
-        elif action == "heic_to_jpg_no_del":
-            cnv.conv_HEICs_dir(dir_path, "jpg")
-            print()
-
-        elif action == "heic_to_jpg_del":
-            cnv.conv_HEICs_dir(dir_path, "jpg", True)
+            cnv.conv_HEICs_dir(dir_path, "jpg", del_og)
             print()
 
         elif action in exit_flags:
@@ -77,20 +73,16 @@ def conv_png_loop(dir_path: Path) -> bool:
             utils.list_convable_images_in_dir(dir_path, "png")
             print()
 
-        elif action == "png_to_jpg_no_del":
-            cnv.conv_PNGs_dir(dir_path, "jpg")
+        elif action == "png_to_jpg":
+            del_og = ask_cnv.ask_del_og_files("png")
+            print()
+            cnv.conv_PNGs_dir(dir_path, "jpg", del_og)
             print()
 
-        elif action == "png_to_jpg_del":
-            cnv.conv_PNGs_dir(dir_path, "jpg", True)
+        elif action == "png_to_heic":
+            del_og = ask_cnv.ask_del_og_files("png")
             print()
-
-        elif action == "png_to_heic_no_del":
-            cnv.conv_PNGs_dir(dir_path, "heic")
-            print()
-
-        elif action == "png_to_heic_del":
-            cnv.conv_PNGs_dir(dir_path, "heic", True)
+            cnv.conv_PNGs_dir(dir_path, "heic", del_og)
             print()
 
         elif action in exit_flags:
@@ -106,20 +98,16 @@ def conv_jpg_loop(dir_path: Path) -> bool:
             utils.list_convable_images_in_dir(dir_path, "jpg")
             print()
 
-        elif action == "jpg_to_png_no_del":
-            cnv.conv_JPGs_dir(dir_path, "png")
+        elif action == "jpg_to_png":
+            del_og = ask_cnv.ask_del_og_files("jpg")
+            print()
+            cnv.conv_JPGs_dir(dir_path, "png", del_og)
             print()
 
-        elif action == "jpg_to_png_del":
-            cnv.conv_JPGs_dir(dir_path, "png", True)
+        elif action == "jpg_to_heic":
+            del_og = ask_cnv.ask_del_og_files("jpg")
             print()
-
-        elif action == "jpg_to_heic_no_del":
-            cnv.conv_JPGs_dir(dir_path, "heic")
-            print()
-
-        elif action == "jpg_to_heic_del":
-            cnv.conv_JPGs_dir(dir_path, "heic", True)
+            cnv.conv_JPGs_dir(dir_path, "heic", del_og)
             print()
 
         elif action in exit_flags:
