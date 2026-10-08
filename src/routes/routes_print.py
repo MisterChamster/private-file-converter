@@ -7,15 +7,20 @@ from pathlib import Path
 def list_images_route(dir_main: Path) -> None:
     while True:
         action = asker_prt.ask_print_convable_images()
+        print()
 
         if action == "list_all":
             utils.list_images_in_dir(dir_main, "all")
+            print()
         elif action == "list_heic":
             utils.list_images_in_dir(dir_main, "heic")
+            print()
         elif action == "list_png":
             utils.list_images_in_dir(dir_main, "png")
+            print()
         elif action == "list_jpg":
             utils.list_images_in_dir(dir_main, "jpg")
+            print()
         elif action == "return":
             return
 

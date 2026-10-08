@@ -20,8 +20,8 @@ def ask_convert_action() -> Literal[
               "h - Convert .heic files...\n"
               "p - Convert .png files...\n"
               "j - Convert .jpg files...\n"
-              "r  - Return\n"
-              "x  - Exit program\n>> ", end="")
+              "r - Return\n"
+              "x - Exit program\n>> ", end="")
         action = input().strip().lower()
 
         if action in returns_dict:
