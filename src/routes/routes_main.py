@@ -20,9 +20,15 @@ def main_loop() -> None:
         if action == "list_audios":
             prt_routes.list_audios_route(dir_main)
 
-        elif action =="convert":
+        elif action =="convert_images":
             print()
-            exit_flag = cnv_routes.convert_loop(dir_main)
+            exit_flag = cnv_routes.convert_images_loop(dir_main)
+            if exit_flag:
+                return
+
+        elif action =="convert_audios":
+            print()
+            exit_flag = cnv_routes.convert_audios_loop(dir_main)
             if exit_flag:
                 return
 

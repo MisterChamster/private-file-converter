@@ -2,7 +2,7 @@ from typing import Literal
 
 
 
-def ask_convert_action() -> Literal[
+def ask_imgs_conv_action() -> Literal[
         "convert_heic",
         "convert_png",
         "convert_jpg",
@@ -126,3 +126,49 @@ def ask_conv_jpg_action() -> Literal[
         if action in returns_dict:
             return returns_dict[action]
         print("Incorrect input.\n")
+
+
+def ask_aud_conv_action() -> Literal[
+        "convert_flac",
+        "convert_ogg",
+        "convert_wav",
+        "convert_mp3",
+        "return",
+        "exit"]:
+    returns_dict = {
+        "f": "convert_flac",
+        "o": "convert_ogg",
+        "w": "convert_wav",
+        "m": "convert_mp3",
+        "r": "return",
+        "x": "exit"}
+
+    while True:
+        print("Choose convert action:\n"
+              "f - Convert .flac files...\n"
+              "o - Convert .ogg files...\n"
+              "w - Convert .wav files...\n"
+              "m - Convert .mp3 files...\n"
+              "r - Return\n"
+              "x - Exit program\n>> ", end="")
+        action = input().strip().lower()
+
+        if action in returns_dict:
+            return returns_dict[action]
+        print("Incorrect input.\n")
+
+
+def ask_conv_flac_action() -> Literal[""]:
+    return ""
+
+
+def ask_conv_ogg_action() -> Literal[""]:
+    return ""
+
+
+def ask_conv_wav_action() -> Literal[""]:
+    return ""
+
+
+def ask_conv_mp3_action() -> Literal[""]:
+    return ""

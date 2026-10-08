@@ -4,20 +4,18 @@ import src.utils as utils
 import src.askers.askers_converting as ask_cnv
 import src.converting_dir_tools as cnv
 
+exit_flags = {
+    "return": False,
+    "exit": True}
 
 
-def convert_loop(dir_path: Path) -> bool:
-    exit_flags = {
-        "return": False,
-        "exit": True}
-
+def convert_images_loop(dir_path: Path) -> bool:
     while True:
-        action = ask_cnv.ask_convert_action()
+        action = ask_cnv.ask_imgs_conv_action()
         print()
 
         if action == "convert_heic":
             print()
-            pass
             exit_flag = conv_heic_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
@@ -25,7 +23,6 @@ def convert_loop(dir_path: Path) -> bool:
 
         elif action == "convert_png":
             print()
-            pass
             exit_flag = conv_png_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
@@ -33,7 +30,6 @@ def convert_loop(dir_path: Path) -> bool:
 
         elif action == "convert_jpg":
             print()
-            pass
             exit_flag = conv_jpg_loop(dir_path)
             if exit_flag:
                 return exit_flags["exit"]
@@ -44,10 +40,6 @@ def convert_loop(dir_path: Path) -> bool:
 
 
 def conv_heic_loop(dir_path: Path) -> bool:
-    exit_flags = {
-        "return": False,
-        "exit": True}
-
     while True:
         action = ask_cnv.ask_conv_heic_action()
         print()
@@ -77,10 +69,6 @@ def conv_heic_loop(dir_path: Path) -> bool:
 
 
 def conv_png_loop(dir_path: Path) -> bool:
-    exit_flags = {
-        "return": False,
-        "exit": True}
-
     while True:
         action = ask_cnv.ask_conv_png_action()
         print()
@@ -110,10 +98,6 @@ def conv_png_loop(dir_path: Path) -> bool:
 
 
 def conv_jpg_loop(dir_path: Path) -> bool:
-    exit_flags = {
-        "return": False,
-        "exit": True}
-
     while True:
         action = ask_cnv.ask_conv_jpg_action()
         print()
@@ -140,3 +124,68 @@ def conv_jpg_loop(dir_path: Path) -> bool:
 
         elif action in exit_flags:
             return exit_flags[action]
+
+
+def convert_audios_loop(dir_path: Path) -> bool:
+    while True:
+        action = ask_cnv.ask_aud_conv_action()
+        print()
+
+        if action == "convert_flac":
+            print()
+            exit_flag = conv_flac_loop(dir_path)
+            if exit_flag:
+                return exit_flags["exit"]
+            print()
+
+        elif action == "convert_ogg":
+            print()
+            exit_flag = conv_ogg_loop(dir_path)
+            if exit_flag:
+                return exit_flags["exit"]
+            print()
+
+        elif action == "convert_wav":
+            print()
+            exit_flag = conv_wav_loop(dir_path)
+            if exit_flag:
+                return exit_flags["exit"]
+            print()
+
+        elif action == "convert_mp3":
+            print()
+            exit_flag = conv_mp3_loop(dir_path)
+            if exit_flag:
+                return exit_flags["exit"]
+            print()
+
+        elif action in exit_flags:
+            return exit_flags[action]
+
+
+def conv_flac_loop(dir_path: Path) -> bool:
+    while True:
+        action = ask_cnv.ask_conv_flac_action()
+        print()
+        return True
+
+
+def conv_ogg_loop(dir_path: Path) -> bool:
+    while True:
+        action = ask_cnv.ask_conv_ogg_action()
+        print()
+        return True
+
+
+def conv_wav_loop(dir_path: Path) -> bool:
+    while True:
+        action = ask_cnv.ask_conv_wav_action()
+        print()
+        return True
+
+
+def conv_mp3_loop(dir_path: Path) -> bool:
+    while True:
+        action = ask_cnv.ask_conv_mp3_action()
+        print()
+        return True
