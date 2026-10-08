@@ -13,7 +13,7 @@ def ask_mainloop_action() -> Literal[
     "exit"]:
     returns_dict = {
         "li": "list_images",
-        "la": "list_audios",
+        # "la": "list_audios",
         "cv": "convert",
         "cd": "change_dir",
         "x":  "exit"}
@@ -21,7 +21,7 @@ def ask_mainloop_action() -> Literal[
     while True:
         print("Choose action: \n"
               "li - List convertable images in folder...\n"
-              "la - List convertable audios in folder...\n"
+            #   "la - List convertable audios in folder...\n"
               "cv - Convert...\n"
               "cd - Change program working directory\n"
               "x  - Exit program\n>> ", end="")
