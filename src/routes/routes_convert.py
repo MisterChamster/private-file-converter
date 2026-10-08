@@ -53,7 +53,7 @@ def conv_heic_loop(dir_path: Path) -> bool:
         print()
 
         if action == "list_heic":
-            utils.list_images_in_dir(dir_path, "heic")
+            utils.list_convable_images_in_dir(dir_path, "heic")
             print()
 
         elif action == "heic_to_png_no_del":
@@ -86,7 +86,7 @@ def conv_png_loop(dir_path: Path) -> bool:
         print()
 
         if action == "list_png":
-            utils.list_images_in_dir(dir_path, "png")
+            utils.list_convable_images_in_dir(dir_path, "png")
             print()
 
         elif action == "png_to_jpg_no_del":
@@ -119,7 +119,7 @@ def conv_jpg_loop(dir_path: Path) -> bool:
         print()
 
         if action == "list_jpg":
-            utils.list_images_in_dir(dir_path, "jpg")
+            utils.list_convable_images_in_dir(dir_path, "jpg")
             print()
 
         elif action == "jpg_to_png_no_del":

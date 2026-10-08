@@ -10,21 +10,40 @@ def list_images_route(dir_main: Path) -> None:
         print()
 
         if action == "list_all":
-            utils.list_images_in_dir(dir_main, "all")
+            utils.list_convable_images_in_dir(dir_main, "all")
             print()
         elif action == "list_heic":
-            utils.list_images_in_dir(dir_main, "heic")
+            utils.list_convable_images_in_dir(dir_main, "heic")
             print()
         elif action == "list_png":
-            utils.list_images_in_dir(dir_main, "png")
+            utils.list_convable_images_in_dir(dir_main, "png")
             print()
         elif action == "list_jpg":
-            utils.list_images_in_dir(dir_main, "jpg")
+            utils.list_convable_images_in_dir(dir_main, "jpg")
             print()
         elif action == "return":
             return
 
 
-# def list_audios_route(dir_main: Path):
-#     utils.list_images_in_dir(dir_main, "all")
-#     print()
+def list_audios_route(dir_main: Path) -> None:
+    while True:
+        action = asker_prt.ask_print_convable_audios()
+        print()
+
+        if action == "list_all":
+            utils.list_convable_audios_in_dir(dir_main, "all")
+            print()
+        elif action == "list_flac":
+            utils.list_convable_audios_in_dir(dir_main, "flac")
+            print()
+        elif action == "list_ogg":
+            utils.list_convable_audios_in_dir(dir_main, "ogg")
+            print()
+        elif action == "list_wav":
+            utils.list_convable_audios_in_dir(dir_main, "wav")
+            print()
+        elif action == "list_mp3":
+            utils.list_convable_audios_in_dir(dir_main, "mp3")
+            print()
+        elif action == "return":
+            return
