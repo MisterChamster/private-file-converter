@@ -40,7 +40,10 @@ def get_files_list(dir_path: Path, ext: str = "any") -> list[Path]:
     if ext != "any":
         nodes_list = [
             a for a in nodes_list
-            if (a.suffix == ext)]
+            if (a.suffix == ext or
+                a.suffix == ext.lower() or
+                a.suffix == ext.upper() or
+                a.suffix == ext.capitalize())]
 
     nodes_list.sort()
     return nodes_list

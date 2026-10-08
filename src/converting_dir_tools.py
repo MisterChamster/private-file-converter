@@ -20,7 +20,7 @@ def conv_HEICs_dir(
             conv_file.HEICtoJPG(file_path)
 
         if not del_flag:
-            return
+            continue
         try:
             os.remove(file_path)
         except:
@@ -40,7 +40,7 @@ def conv_PNGs_dir(
             conv_file.PNGtoHEIC(file_path)
 
         if not del_flag:
-            return
+            continue
         try:
             os.remove(file_path)
         except:
@@ -60,7 +60,7 @@ def conv_JPGs_dir(
             conv_file.JPGtoHEIC(file_path)
 
         if not del_flag:
-            return
+            continue
         try:
             os.remove(file_path)
         except:

@@ -38,7 +38,7 @@ def ask_conv_heic_action() -> Literal[
     "return",
     "exit"]:
     returns_dict = {
-        "lh": "list_heic",
+        "l":  "list_heic",
         "p":  "heic_to_png_no_del",
         "pd": "heic_to_png_del",
         "j":  "heic_to_jpg_no_del",
@@ -48,7 +48,7 @@ def ask_conv_heic_action() -> Literal[
 
     while True:
         print("Choose heic files conversion action:\n"
-              "lh - List all .heic files in folder\n"
+              "l  - List all .heic files in folder\n"
               "p  - Convert to .png files (leave heic files)\n"
               "pd - Convert to .png files (delete heic files)\n"
               "j  - Convert to .jpg files (leave heic files)\n"
@@ -63,7 +63,7 @@ def ask_conv_heic_action() -> Literal[
 
 
 def ask_conv_png_action() -> Literal[
-    "list_heic",
+    "list_png",
     "png_to_jpg_no_del",
     "png_to_jpg_del",
     "png_to_heic_no_del",
@@ -71,7 +71,7 @@ def ask_conv_png_action() -> Literal[
     "return",
     "exit"]:
     returns_dict = {
-        "lh": "list_png",
+        "l":  "list_png",
         "j":  "png_to_jpg_no_del",
         "jd": "png_to_jpg_del",
         "h":  "png_to_heic_no_del",
