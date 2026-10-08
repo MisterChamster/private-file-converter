@@ -49,7 +49,7 @@ def conv_heic_loop(dir_path: Path) -> bool:
         "exit": True}
 
     while True:
-        action = ask_cnv.ask_htp_action()
+        action = ask_cnv.ask_conv_heic_action()
         print()
 
         if action == "list_heic":
@@ -64,23 +64,6 @@ def conv_heic_loop(dir_path: Path) -> bool:
             cnv.HEICtoPNG_dir(dir_path, True)
             print("\n")
 
-        elif action in exit_flags:
-            return exit_flags[action]
-
-
-def conv_png_loop(dir_path: Path) -> bool:
-    exit_flags = {
-        "return": False,
-        "exit": True}
-
-    while True:
-        action = ask_cnv.ask_htj_action()
-        print()
-
-        if action == "list_heic":
-            utils.list_images_in_dir(dir_path, "heic")
-            print("\n")
-
         elif action == "heic_to_jpg_no_del":
             cnv.HEICtoJPG_dir(dir_path)
             print("\n")
@@ -93,13 +76,13 @@ def conv_png_loop(dir_path: Path) -> bool:
             return exit_flags[action]
 
 
-def conv_jpg_loop(dir_path: Path) -> bool:
+def conv_png_loop(dir_path: Path) -> bool:
     exit_flags = {
         "return": False,
         "exit": True}
 
     while True:
-        action = ask_cnv.ask_ptj_action()
+        action = ask_cnv.ask_conv_png_action()
         print()
 
         if action == "list_png":
@@ -112,6 +95,47 @@ def conv_jpg_loop(dir_path: Path) -> bool:
 
         elif action == "png_to_jpg_del":
             cnv.PNGtoJPG_dir(dir_path, True)
+            print("\n")
+
+        elif action == "png_to_heic_no_del":
+            cnv.PNGtoHEIC_dir(dir_path)
+            print("\n")
+
+        elif action == "png_to_heic_del":
+            cnv.PNGtoHEIC_dir(dir_path, True)
+            print("\n")
+
+        elif action in exit_flags:
+            return exit_flags[action]
+
+
+def conv_jpg_loop(dir_path: Path) -> bool:
+    exit_flags = {
+        "return": False,
+        "exit": True}
+
+    while True:
+        action = ask_cnv.ask_conv_jpg_action()
+        print()
+
+        if action == "list_jpg":
+            utils.list_images_in_dir(dir_path, "jpg")
+            print("\n")
+
+        elif action == "jpg_to_png_no_del":
+            cnv.JPGtoPNG_dir(dir_path)
+            print("\n")
+
+        elif action == "jpg_to_png_del":
+            cnv.JPGtoPNG_dir(dir_path, True)
+            print("\n")
+
+        elif action == "jpg_to_heic_no_del":
+            cnv.JPGtoHEIC_dir(dir_path)
+            print("\n")
+
+        elif action == "jpg_to_heic_del":
+            cnv.JPGtoHEIC_dir(dir_path, True)
             print("\n")
 
         elif action in exit_flags:
