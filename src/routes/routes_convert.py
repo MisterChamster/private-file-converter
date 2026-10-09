@@ -51,13 +51,13 @@ def conv_heic_loop(dir_path: Path) -> bool:
         elif action == "heic_to_png":
             del_og = ask_cnv.ask_del_og_files("heic")
             print()
-            cnv.conv_HEICs_dir(dir_path, "png", del_og)
+            cnv.conv_images_dir(dir_path, "heic", "png", del_og)
             print()
 
         elif action == "heic_to_jpg":
             del_og = ask_cnv.ask_del_og_files("heic")
             print()
-            cnv.conv_HEICs_dir(dir_path, "jpg", del_og)
+            cnv.conv_images_dir(dir_path, "heic", "jpg", del_og)
             print()
 
         elif action in exit_flags:
@@ -76,13 +76,13 @@ def conv_png_loop(dir_path: Path) -> bool:
         elif action == "png_to_jpg":
             del_og = ask_cnv.ask_del_og_files("png")
             print()
-            cnv.conv_PNGs_dir(dir_path, "jpg", del_og)
+            cnv.conv_images_dir(dir_path, "png", "jpg", del_og)
             print()
 
         elif action == "png_to_heic":
             del_og = ask_cnv.ask_del_og_files("png")
             print()
-            cnv.conv_PNGs_dir(dir_path, "heic", del_og)
+            cnv.conv_images_dir(dir_path, "png", "heic", del_og)
             print()
 
         elif action in exit_flags:
@@ -101,13 +101,13 @@ def conv_jpg_loop(dir_path: Path) -> bool:
         elif action == "jpg_to_png":
             del_og = ask_cnv.ask_del_og_files("jpg")
             print()
-            cnv.conv_JPGs_dir(dir_path, "png", del_og)
+            cnv.conv_images_dir(dir_path, "jpg", "png", del_og)
             print()
 
         elif action == "jpg_to_heic":
             del_og = ask_cnv.ask_del_og_files("jpg")
             print()
-            cnv.conv_JPGs_dir(dir_path, "heic", del_og)
+            cnv.conv_images_dir(dir_path, "jpg", "heic", del_og)
             print()
 
         elif action in exit_flags:
