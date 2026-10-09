@@ -65,3 +65,35 @@ def conv_JPGs_dir(
             os.remove(file_path)
         except:
             print("Couldn't remove " + file_path.name)
+
+
+def conv_FLACs_dir(
+        images_dir: Path,
+        target_ext: Literal["ogg", "wav", "mp3"],
+        del_flag: bool = False) -> None:
+    files_list = utils.get_files_list(images_dir, ".flac")
+    pass
+
+
+def conv_OGGs_dir(
+        images_dir: Path,
+        target_ext: Literal["flac", "wav", "mp3"],
+        del_flag: bool = False) -> None:
+    files_list = utils.get_files_list(images_dir, ".ogg")
+    pass
+
+
+def conv_WAVs_dir(
+        images_dir: Path,
+        target_ext: Literal["flac", "ogg", "mp3"],
+        del_flag: bool = False) -> None:
+    files_list = utils.get_files_list(images_dir, ".wav")
+    pass
+
+
+def conv_MP3s_dir(
+        images_dir: Path,
+        target_ext: Literal["flac", "ogg", "wav"],
+        del_flag: bool = False) -> None:
+    files_list = utils.get_files_list(images_dir, ".mp3")
+    pass
