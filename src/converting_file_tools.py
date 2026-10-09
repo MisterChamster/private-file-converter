@@ -79,3 +79,51 @@ def JPGtoHEIC(image_path: Path) -> None:
     new_filename = image_path.stem + ".heic"
     new_filepath = image_path.parent / new_filename
     rgb_image.save(new_filepath, "heif")
+
+
+def FLACtoOGG(image_path: Path) -> None:
+    return
+
+
+def FLACtoWAV(image_path: Path) -> None:
+    return
+
+
+def FLACtoMP3(image_path: Path) -> None:
+    return
+
+
+def OGGtoFLAC(image_path: Path) -> None:
+    return
+
+
+def OGGtoWAV(image_path: Path) -> None:
+    return
+
+
+def OGGtoMP3(image_path: Path) -> None:
+    return
+
+
+def WAVtoFLAC(image_path: Path) -> None:
+    return
+
+
+def WAVtoOGG(image_path: Path) -> None:
+    return
+
+
+def WAVtoMP3(image_path: Path) -> None:
+    return
+
+
+def MP3toFLAC(image_path: Path) -> None:
+    return
+
+
+def MP3toOGG(image_path: Path) -> None:
+    return
+
+
+def MP3toWAV(image_path: Path) -> None:
+    return
