@@ -53,33 +53,60 @@ def conv_images_dir(
             print("Couldn't remove " + file_path.name)
 
 
-def conv_FLACs_dir(
-        images_dir: Path,
-        target_ext: Literal["ogg", "wav", "mp3"],
+def conv_audios_dir(
+        audios_dir: Path,
+        og_ext: Literal["flac", "ogg", "wav", "mp3"],
+        target_ext: Literal["flac", "ogg", "wav", "mp3"],
         del_flag: bool = False) -> None:
-    files_list = utils.get_files_list(images_dir, ".flac")
-    pass
+    if og_ext == target_ext:
+        raise ValueError("Cannot convert file type to itself.")
 
+    def choose_convert_function(
+        og_ext: Literal["flac", "ogg", "wav", "mp3"],
+        target_ext: Literal["flac", "ogg", "wav", "mp3"]) -> Callable[[Path], None]:
+        match og_ext:
+            case "flac":
+                match target_ext:
+                    case "ogg":
+                        pass
+                    case "wav":
+                        pass
+                    case "mp3":
+                        pass
+            case "ogg":
+                match target_ext:
+                    case "flac":
+                        pass
+                    case "wav":
+                        pass
+                    case "mp3":
+                        pass
+            case "wav":
+                match target_ext:
+                    case "flac":
+                        pass
+                    case "ogg":
+                        pass
+                    case "mp3":
+                        pass
+            case "mp3":
+                match target_ext:
+                    case "flac":
+                        pass
+                    case "ogg":
+                        pass
+                    case "wav":
+                        pass
 
-def conv_OGGs_dir(
-        images_dir: Path,
-        target_ext: Literal["flac", "wav", "mp3"],
-        del_flag: bool = False) -> None:
-    files_list = utils.get_files_list(images_dir, ".ogg")
-    pass
+    files_list = utils.get_files_list(audios_dir, f".{og_ext}")
+    convert_funtion = choose_convert_function(og_ext, target_ext)
 
+    for file_path in files_list:
+        convert_funtion(file_path)
 
-def conv_WAVs_dir(
-        images_dir: Path,
-        target_ext: Literal["flac", "ogg", "mp3"],
-        del_flag: bool = False) -> None:
-    files_list = utils.get_files_list(images_dir, ".wav")
-    pass
-
-
-def conv_MP3s_dir(
-        images_dir: Path,
-        target_ext: Literal["flac", "ogg", "wav"],
-        del_flag: bool = False) -> None:
-    files_list = utils.get_files_list(images_dir, ".mp3")
-    pass
+        if not del_flag:
+            continue
+        try:
+            os.remove(file_path)
+        except:
+            print("Couldn't remove " + file_path.name)

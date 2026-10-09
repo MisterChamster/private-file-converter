@@ -162,17 +162,17 @@ def conv_flac_loop(dir_path: Path) -> bool:
         elif action == "flac_to_ogg":
             del_og = ask_cnv.ask_del_og_files("flac")
             print()
-            cnv.conv_FLACs_dir(dir_path, "ogg", del_og)
+            cnv.conv_audios_dir(dir_path, "flac", "ogg", del_og)
             print()
         elif action == "flac_to_wav":
             del_og = ask_cnv.ask_del_og_files("flac")
             print()
-            cnv.conv_FLACs_dir(dir_path, "wav", del_og)
+            cnv.conv_audios_dir(dir_path, "flac", "wav", del_og)
             print()
         elif action == "flac_to_mp3":
             del_og = ask_cnv.ask_del_og_files("flac")
             print()
-            cnv.conv_FLACs_dir(dir_path, "mp3", del_og)
+            cnv.conv_audios_dir(dir_path, "flac", "mp3", del_og)
             print()
         elif action in exit_flags:
             return exit_flags[action]
@@ -189,17 +189,17 @@ def conv_ogg_loop(dir_path: Path) -> bool:
         elif action == "ogg_to_flac":
             del_og = ask_cnv.ask_del_og_files("ogg")
             print()
-            cnv.conv_OGGs_dir(dir_path, "flac", del_og)
+            cnv.conv_audios_dir(dir_path, "ogg", "flac", del_og)
             print()
         elif action == "ogg_to_wav":
             del_og = ask_cnv.ask_del_og_files("ogg")
             print()
-            cnv.conv_OGGs_dir(dir_path, "wav", del_og)
+            cnv.conv_audios_dir(dir_path, "ogg", "wav", del_og)
             print()
         elif action == "ogg_to_mp3":
             del_og = ask_cnv.ask_del_og_files("ogg")
             print()
-            cnv.conv_OGGs_dir(dir_path, "mp3", del_og)
+            cnv.conv_audios_dir(dir_path, "ogg", "mp3", del_og)
             print()
         elif action in exit_flags:
             return exit_flags[action]
@@ -216,17 +216,17 @@ def conv_wav_loop(dir_path: Path) -> bool:
         elif action == "wav_to_flac":
             del_og = ask_cnv.ask_del_og_files("wav")
             print()
-            cnv.conv_WAVs_dir(dir_path, "flac", del_og)
+            cnv.conv_audios_dir(dir_path, "wav", "flac", del_og)
             print()
         elif action == "wav_to_ogg":
             del_og = ask_cnv.ask_del_og_files("wav")
             print()
-            cnv.conv_WAVs_dir(dir_path, "ogg", del_og)
+            cnv.conv_audios_dir(dir_path, "wav", "ogg", del_og)
             print()
         elif action == "wav_to_mp3":
             del_og = ask_cnv.ask_del_og_files("wav")
             print()
-            cnv.conv_WAVs_dir(dir_path, "mp3", del_og)
+            cnv.conv_audios_dir(dir_path, "wav", "mp3", del_og)
             print()
         elif action in exit_flags:
             return exit_flags[action]
@@ -243,17 +243,17 @@ def conv_mp3_loop(dir_path: Path) -> bool:
         elif action == "mp3_to_flac":
             del_og = ask_cnv.ask_del_og_files("mp3")
             print()
-            cnv.conv_MP3s_dir(dir_path, "flac", del_og)
+            cnv.conv_audios_dir(dir_path, "mp3", "flac", del_og)
             print()
         elif action == "mp3_to_ogg":
             del_og = ask_cnv.ask_del_og_files("mp3")
             print()
-            cnv.conv_MP3s_dir(dir_path, "ogg", del_og)
+            cnv.conv_audios_dir(dir_path, "mp3", "ogg", del_og)
             print()
         elif action == "mp3_to_wav":
             del_og = ask_cnv.ask_del_og_files("mp3")
             print()
-            cnv.conv_MP3s_dir(dir_path, "wav", del_og)
+            cnv.conv_audios_dir(dir_path, "mp3", "wav", del_og)
             print()
         elif action in exit_flags:
             return exit_flags[action]
