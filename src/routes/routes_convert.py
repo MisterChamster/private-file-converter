@@ -162,11 +162,17 @@ def conv_flac_loop(dir_path: Path) -> bool:
         elif action == "flac_to_ogg":
             del_og = ask_cnv.ask_del_og_files("flac")
             print()
+            pass
+            print()
         elif action == "flac_to_wav":
             del_og = ask_cnv.ask_del_og_files("flac")
             print()
+            pass
+            print()
         elif action == "flac_to_mp3":
             del_og = ask_cnv.ask_del_og_files("flac")
+            print()
+            pass
             print()
         elif action in exit_flags:
             return exit_flags[action]
