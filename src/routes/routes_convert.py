@@ -155,25 +155,99 @@ def conv_flac_loop(dir_path: Path) -> bool:
     while True:
         action = ask_cnv.ask_conv_flac_action()
         print()
-        return True
+
+        if action == "list_flac":
+            utils.list_convable_audios_in_dir(dir_path, "flac")
+            print()
+        elif action == "flac_to_ogg":
+            del_og = ask_cnv.ask_del_og_files("flac")
+            print()
+        elif action == "flac_to_wav":
+            del_og = ask_cnv.ask_del_og_files("flac")
+            print()
+        elif action == "flac_to_mp3":
+            del_og = ask_cnv.ask_del_og_files("flac")
+            print()
+        elif action in exit_flags:
+            return exit_flags[action]
 
 
 def conv_ogg_loop(dir_path: Path) -> bool:
     while True:
         action = ask_cnv.ask_conv_ogg_action()
         print()
-        return True
+
+        if action == "list_ogg":
+            utils.list_convable_audios_in_dir(dir_path, "ogg")
+            print()
+        elif action == "ogg_to_flac":
+            del_og = ask_cnv.ask_del_og_files("ogg")
+            print()
+            pass
+            print()
+        elif action == "ogg_to_wav":
+            del_og = ask_cnv.ask_del_og_files("ogg")
+            print()
+            pass
+            print()
+        elif action == "ogg_to_mp3":
+            del_og = ask_cnv.ask_del_og_files("ogg")
+            print()
+            pass
+            print()
+        elif action in exit_flags:
+            return exit_flags[action]
 
 
 def conv_wav_loop(dir_path: Path) -> bool:
     while True:
         action = ask_cnv.ask_conv_wav_action()
         print()
-        return True
+
+        if action == "list_wav":
+            utils.list_convable_audios_in_dir(dir_path, "wav")
+            print()
+        elif action == "wav_to_flac":
+            del_og = ask_cnv.ask_del_og_files("wav")
+            print()
+            pass
+            print()
+        elif action == "wav_to_ogg":
+            del_og = ask_cnv.ask_del_og_files("wav")
+            print()
+            pass
+            print()
+        elif action == "wav_to_mp3":
+            del_og = ask_cnv.ask_del_og_files("wav")
+            print()
+            pass
+            print()
+        elif action in exit_flags:
+            return exit_flags[action]
 
 
 def conv_mp3_loop(dir_path: Path) -> bool:
     while True:
         action = ask_cnv.ask_conv_mp3_action()
         print()
-        return True
+
+        if action == "list_mp3":
+            utils.list_convable_audios_in_dir(dir_path, "mp3")
+            print()
+        elif action == "mp3_to_flac":
+            del_og = ask_cnv.ask_del_og_files("mp3")
+            print()
+            pass
+            print()
+        elif action == "mp3_to_ogg":
+            del_og = ask_cnv.ask_del_og_files("mp3")
+            print()
+            pass
+            print()
+        elif action == "mp3_to_wav":
+            del_og = ask_cnv.ask_del_og_files("mp3")
+            print()
+            pass
+            print()
+        elif action in exit_flags:
+            return exit_flags[action]
