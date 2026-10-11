@@ -1,6 +1,7 @@
 from pathlib import Path
 from PIL import Image
-from mutagen.flac import FLAC
+from mutagen.id3 import ID3, APIC
+from mutagen.flac import FLAC, Picture
 from mutagen.oggvorbis import OggVorbis
 import pillow_heif
 import subprocess
@@ -117,7 +118,7 @@ def FLACtoOGG(audio_path: Path, quality: int) -> None:
     target.save()
 
 
-def FLACtoWAV(audio_path: Path, ignore_arg) -> None:
+def FLACtoWAV(audio_path: Path, ignore_arg = None) -> None:
     new_filepath = audio_path.with_suffix(".wav")
     print("Converting:", audio_path.name)
     try:
@@ -160,19 +161,19 @@ def FLACtoMP3(audio_path: Path, quality: int) -> None:
         raise Exception(e)
 
 
-def OGGtoFLAC(audio_path: Path) -> None:
+def OGGtoFLAC(audio_path: Path, ignore_arg = None) -> None:
     return
 
 
-def OGGtoWAV(audio_path: Path) -> None:
+def OGGtoWAV(audio_path: Path, ignore_arg = None) -> None:
     return
 
 
-def OGGtoMP3(audio_path: Path) -> None:
+def OGGtoMP3(audio_path: Path, quality: int) -> None:
     return
 
 
-def WAVtoFLAC(audio_path: Path, ignore_arg) -> None:
+def WAVtoFLAC(audio_path: Path, ignore_arg = None) -> None:
     new_filepath = audio_path.with_suffix(".flac")
     print("Converting:", audio_path.name)
     try:
@@ -234,13 +235,94 @@ def WAVtoMP3(audio_path: Path, quality: int) -> None:
         raise Exception(e)
 
 
-def MP3toFLAC(audio_path: Path) -> None:
-    return
+def get_mp3_pic_data(source_path: Path) -> list[Picture]:
+    tags = ID3(source_path)
+    pictures = []
+
+    for frame in tags.getall("APIC"):
+        picture = Picture()
+        picture.data = frame.data
+        picture.mime = frame.mime
+        picture.type = frame.type
+        picture.desc = frame.desc
+        picture.width = 0
+        picture.height = 0
+        picture.depth = 0
+        picture.colors = 0
+        pictures.append(picture)
+
+    return pictures
 
 
-def MP3toOGG(audio_path: Path) -> None:
-    return
+def MP3toFLAC(audio_path: Path, ignore_arg = None) -> None:
+    new_filepath = audio_path.with_suffix(".flac")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "flac",
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
+
+    pictures = get_mp3_pic_data(audio_path)
+    target = FLAC(new_filepath)
+    target.clear_pictures()
+
+    for picture in pictures:
+        target.add_picture(picture)
+    target.save()
 
 
-def MP3toWAV(audio_path: Path) -> None:
-    return
+
+def MP3toOGG(audio_path: Path, quality: int) -> None:
+    new_filepath = audio_path.with_suffix(".ogg")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "libvorbis",
+            "-q:a", str(quality),
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
+
+    pictures = get_mp3_pic_data(audio_path)
+    target = OggVorbis(new_filepath)
+    key = "METADATA_BLOCK_PICTURE"
+    if key in target:
+        del target[key]
+
+    target[key] = [
+        base64.b64encode(picture.write()).decode("ascii")
+        for picture in pictures]
+
+
+def MP3toWAV(audio_path: Path, ignore_arg = None) -> None:
+    new_filepath = audio_path.with_suffix(".wav")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "pcm_s16le",
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
