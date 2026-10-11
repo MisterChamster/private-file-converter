@@ -124,6 +124,35 @@ def ask_conv_jpg_action() -> Literal[
         print("Incorrect input.\n")
 
 
+def ask_lossy_quality(extension: Literal["mp3", "ogg"]) -> int:
+    quality_range = [0]
+    msg_app = ""
+    if extension == "mp3":
+        quality_range.append(9)
+        msg_app = "(higher value is lower quality)"
+    elif extension == "ogg":
+        quality_range.append(10)
+        msg_app = "(lower value is higher quality)"
+    else:
+        raise Exception("Incorrect extension input.\n")
+
+    message = f"Input quality from {quality_range[0]} to {quality_range[1]} for the {extension} files."
+
+    while True:
+        print(f"{message} {msg_app}\n>> ", end="")
+        quality = input().strip()
+        if not quality.isdigit():
+            print("Not a numerical value\n")
+            continue
+
+        quality = int(quality)
+        if quality < quality_range[0] or quality > quality_range[1]:
+            print(f"Value not in {quality_range[0]}-{quality_range[1]} range.\n")
+            continue
+
+        return quality
+
+
 def ask_aud_conv_action() -> Literal[
         "convert_flac",
         "convert_ogg",

@@ -5,6 +5,7 @@ from collections.abc import Callable
 
 import src.converting_file_tools as conv_file
 import src.utils as utils
+import src.askers.askers_converting as ask_conv
 
 
 
@@ -98,11 +99,14 @@ def conv_audios_dir(
                     case "wav":
                         return conv_file.MP3toWAV
 
+    quality = (ask_conv.ask_lossy_quality(og_ext)
+               if og_ext in ["mp3", "ogg"]
+               else None)
     files_list = utils.get_files_list(audios_dir, f".{og_ext}")
     convert_funtion = choose_convert_function(og_ext, target_ext)
 
     for file_path in files_list:
-        convert_funtion(file_path, 6)
+        convert_funtion(file_path, quality)
 
         if not del_flag:
             continue
