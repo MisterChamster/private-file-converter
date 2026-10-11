@@ -99,9 +99,11 @@ def conv_audios_dir(
                     case "wav":
                         return conv_file.MP3toWAV
 
-    quality = (ask_conv.ask_lossy_quality(target_ext)
-               if target_ext in ["mp3", "ogg"]
-               else None)
+    if target_ext in ["mp3", "ogg"]:
+        quality = ask_conv.ask_lossy_quality(target_ext)
+        print()
+    else:
+        quality = None
     files_list = utils.get_files_list(audios_dir, f".{og_ext}")
     convert_funtion = choose_convert_function(og_ext, target_ext)
 

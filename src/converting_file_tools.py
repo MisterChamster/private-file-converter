@@ -280,7 +280,6 @@ def MP3toFLAC(audio_path: Path, ignore_arg = None) -> None:
     target.save()
 
 
-
 def MP3toOGG(audio_path: Path, quality: int) -> None:
     new_filepath = audio_path.with_suffix(".ogg")
     print("Converting:", audio_path.name)
@@ -308,6 +307,7 @@ def MP3toOGG(audio_path: Path, quality: int) -> None:
     target[key] = [
         base64.b64encode(picture.write()).decode("ascii")
         for picture in pictures]
+    target.save()
 
 
 def MP3toWAV(audio_path: Path, ignore_arg = None) -> None:
