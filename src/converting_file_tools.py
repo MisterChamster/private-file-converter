@@ -136,7 +136,7 @@ def FLACtoWAV(audio_path: Path, ignore_arg) -> None:
 
 
 def FLACtoMP3(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 10:
+    if quality < 0 or quality > 9:
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".mp3")
@@ -172,16 +172,66 @@ def OGGtoMP3(audio_path: Path) -> None:
     return
 
 
-def WAVtoFLAC(audio_path: Path) -> None:
-    return
+def WAVtoFLAC(audio_path: Path, ignore_arg) -> None:
+    new_filepath = audio_path.with_suffix(".flac")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "flac",
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
 
 
-def WAVtoOGG(audio_path: Path) -> None:
-    return
+def WAVtoOGG(audio_path: Path, quality: int) -> None:
+    if quality < 0 or quality > 10:
+        raise ValueError("Invalid quality")
+
+    new_filepath = audio_path.with_suffix(".ogg")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "libvorbis",
+            "-q:a", str(quality),
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
 
 
-def WAVtoMP3(audio_path: Path) -> None:
-    return
+def WAVtoMP3(audio_path: Path, quality: int) -> None:
+    if quality < 0 or quality > 9:
+        raise ValueError("Invalid quality")
+
+    new_filepath = audio_path.with_suffix(".mp3")
+    print("Converting:", audio_path.name)
+    try:
+        subprocess.run([
+            "ffmpeg",
+            "-i", str(audio_path),
+            "-map", "0:a:0",
+            "-map_metadata", "0",
+            "-c:a", "libmp3lame",
+            "-q:a", str(quality),
+            "-y", str(new_filepath)],
+        check=True,
+        capture_output=True,
+        text=True)
+    except Exception as e:
+        raise Exception(e)
 
 
 def MP3toFLAC(audio_path: Path) -> None:
