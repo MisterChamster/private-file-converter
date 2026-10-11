@@ -102,7 +102,7 @@ def conv_audios_dir(
     convert_funtion = choose_convert_function(og_ext, target_ext)
 
     for file_path in files_list:
-        convert_funtion(file_path)
+        convert_funtion(file_path, 6)
 
         if not del_flag:
             continue
