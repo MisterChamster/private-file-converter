@@ -117,7 +117,7 @@ def FLACtoOGG(audio_path: Path, quality: int) -> None:
     target.save()
 
 
-def FLACtoWAV(audio_path: Path) -> None:
+def FLACtoWAV(audio_path: Path, ignore_arg) -> None:
     new_filepath = audio_path.with_suffix(".wav")
     print("Converting:", audio_path.name)
     try:
