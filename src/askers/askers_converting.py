@@ -132,7 +132,7 @@ def ask_lossy_quality(extension: Literal["mp3", "ogg"]) -> int:
         msg_app = "(higher value is lower quality)"
     elif extension == "ogg":
         quality_range.append(10)
-        msg_app = "(lower value is higher quality)"
+        msg_app = "(higher value is higher quality)"
     else:
         raise Exception("Incorrect extension input.\n")
 
