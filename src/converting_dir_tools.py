@@ -22,29 +22,17 @@ def conv_images_dir(
             target_ext: Literal["jpg", "png", "heic"]) -> Callable[[Path], None]:
         match og_ext:
             case "heic":
-                match target_ext:
-                    case "png":
-                        return conv_file.HEICtoPNG
-                    case "jpg":
-                        return conv_file.HEICtoJPG
+                return conv_file.convertHEIC
             case "png":
-                match target_ext:
-                    case "heic":
-                        return conv_file.PNGtoHEIC
-                    case "jpg":
-                        return conv_file.PNGtoJPG
+                return conv_file.convertPNG
             case "jpg":
-                match target_ext:
-                    case "png":
-                        return conv_file.JPGtoPNG
-                    case "heic":
-                        return conv_file.JPGtoHEIC
+                return conv_file.convertJPG
 
     files_list = utils.get_files_list(images_dir, f".{og_ext}")
     convert_funtion = choose_convert_function(og_ext, target_ext)
 
     for file_path in files_list:
-        convert_funtion(file_path)
+        convert_funtion(file_path, target_ext)
 
         if not del_flag:
             continue
