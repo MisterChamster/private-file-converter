@@ -69,8 +69,19 @@ def convertJPG(
         rgb_image.save(new_filepath, "heif")
 
 
+def is_quality_valid(quality: int, extension: Literal["flac", "ogg", "wav", "mp3"]) -> bool:
+    if extension in ["flac", "wav"]:
+        return True
+    if quality < 0:
+        return False
+    if extension == "ogg" and quality > 10:
+        return False
+    if extension == "mp3" and quality > 9:
+        return False
+
+
 def FLACtoOGG(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 10:
+    if not is_quality_valid(quality, "ogg"):
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".ogg")
@@ -120,7 +131,7 @@ def FLACtoWAV(audio_path: Path, ignore_arg = None) -> None:
 
 
 def FLACtoMP3(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 9:
+    if not is_quality_valid(quality, "mp3"):
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".mp3")
@@ -198,7 +209,7 @@ def OGGtoWAV(audio_path: Path, ignore_arg = None) -> None:
 
 
 def OGGtoMP3(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 9:
+    if not is_quality_valid(quality, "mp3"):
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".mp3")
@@ -289,7 +300,7 @@ def WAVtoFLAC(audio_path: Path, ignore_arg = None) -> None:
 
 
 def WAVtoOGG(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 10:
+    if not is_quality_valid(quality, "ogg"):
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".ogg")
@@ -311,7 +322,7 @@ def WAVtoOGG(audio_path: Path, quality: int) -> None:
 
 
 def WAVtoMP3(audio_path: Path, quality: int) -> None:
-    if quality < 0 or quality > 9:
+    if not is_quality_valid(quality, "mp3"):
         raise ValueError("Invalid quality")
 
     new_filepath = audio_path.with_suffix(".mp3")
@@ -378,6 +389,9 @@ def MP3toFLAC(audio_path: Path, ignore_arg = None) -> None:
 
 
 def MP3toOGG(audio_path: Path, quality: int) -> None:
+    if not is_quality_valid(quality, "ogg"):
+        raise ValueError("Invalid quality")
+
     new_filepath = audio_path.with_suffix(".ogg")
     print("Converting:", audio_path.name)
     try:
