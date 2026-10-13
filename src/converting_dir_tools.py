@@ -59,13 +59,7 @@ def conv_audios_dir(
             case "ogg":
                 return conv_file.convertOGG
             case "wav":
-                match target_ext:
-                    case "flac":
-                        return conv_file.WAVtoFLAC
-                    case "ogg":
-                        return conv_file.WAVtoOGG
-                    case "mp3":
-                        return conv_file.WAVtoMP3
+                return conv_file.convertWAV
             case "mp3":
                 match target_ext:
                     case "flac":

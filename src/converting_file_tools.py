@@ -287,66 +287,59 @@ def convertOGG(audio_path: Path,
         tags.save(new_filepath, v2_version=4)
 
 
-def WAVtoFLAC(audio_path: Path, ignore_arg = None) -> None:
-    new_filepath = audio_path.with_suffix(".flac")
-    print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "flac",
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
-
-
-def WAVtoOGG(audio_path: Path, quality: int) -> None:
-    if not is_quality_valid(quality, "ogg"):
+def convertWAV(audio_path: Path,
+               target_ext: Literal["flac", "ogg", "mp3"],
+               quality: int| None = None) -> None:
+    if not is_quality_valid(quality, target_ext):
         raise ValueError("Invalid quality")
 
-    new_filepath = audio_path.with_suffix(".ogg")
+    new_filepath = audio_path.with_suffix(f".{target_ext}")
     print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "libvorbis",
-            "-q:a", str(quality),
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
 
-
-def WAVtoMP3(audio_path: Path, quality: int) -> None:
-    if not is_quality_valid(quality, "mp3"):
-        raise ValueError("Invalid quality")
-
-    new_filepath = audio_path.with_suffix(".mp3")
-    print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "libmp3lame",
-            "-q:a", str(quality),
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
+    if target_ext == "flac":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "flac",
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
+    elif target_ext == "ogg":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "libvorbis",
+                "-q:a", str(quality),
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
+    elif target_ext == "mp3":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "libmp3lame",
+                "-q:a", str(quality),
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
 
 
 def get_mp3_pic_data(source_path: Path) -> list[Picture]:
