@@ -55,21 +55,9 @@ def conv_audios_dir(
         target_ext: Literal["flac", "ogg", "wav", "mp3"]) -> Callable[[Path], None]:
         match og_ext:
             case "flac":
-                match target_ext:
-                    case "ogg":
-                        return conv_file.FLACtoOGG
-                    case "wav":
-                        return conv_file.FLACtoWAV
-                    case "mp3":
-                        return conv_file.FLACtoMP3
+                return conv_file.convertFLAC
             case "ogg":
-                match target_ext:
-                    case "flac":
-                        return conv_file.OGGtoFLAC
-                    case "wav":
-                        return conv_file.OGGtoWAV
-                    case "mp3":
-                        return conv_file.OGGtoMP3
+                return conv_file.convertOGG
             case "wav":
                 match target_ext:
                     case "flac":
@@ -96,7 +84,7 @@ def conv_audios_dir(
     convert_funtion = choose_convert_function(og_ext, target_ext)
 
     for file_path in files_list:
-        convert_funtion(file_path, quality)
+        convert_funtion(file_path, target_ext, quality)
 
         if not del_flag:
             continue
