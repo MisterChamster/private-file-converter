@@ -51,8 +51,7 @@ def conv_audios_dir(
         raise ValueError("Cannot convert file type to itself.")
 
     def choose_convert_function(
-        og_ext: Literal["flac", "ogg", "wav", "mp3"],
-        target_ext: Literal["flac", "ogg", "wav", "mp3"]) -> Callable[[Path], None]:
+        og_ext: Literal["flac", "ogg", "wav", "mp3"]) -> Callable[[Path], None]:
         match og_ext:
             case "flac":
                 return conv_file.convertFLAC
@@ -61,13 +60,7 @@ def conv_audios_dir(
             case "wav":
                 return conv_file.convertWAV
             case "mp3":
-                match target_ext:
-                    case "flac":
-                        return conv_file.MP3toFLAC
-                    case "ogg":
-                        return conv_file.MP3toOGG
-                    case "wav":
-                        return conv_file.MP3toWAV
+                return conv_file.convertMP3
 
     if target_ext in ["mp3", "ogg"]:
         quality = ask_conv.ask_lossy_quality(target_ext)
@@ -75,7 +68,7 @@ def conv_audios_dir(
     else:
         quality = None
     files_list = utils.get_files_list(audios_dir, f".{og_ext}")
-    convert_funtion = choose_convert_function(og_ext, target_ext)
+    convert_funtion = choose_convert_function(og_ext)
 
     for file_path in files_list:
         convert_funtion(file_path, target_ext, quality)

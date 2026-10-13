@@ -83,7 +83,7 @@ def is_quality_valid(quality: int, extension: Literal["flac", "ogg", "wav", "mp3
 
 def convertFLAC(audio_path: Path,
                 target_ext: Literal["ogg", "wav", "mp3"],
-                quality: int| None = None) -> None:
+                quality: int|None = None) -> None:
     if not is_quality_valid(quality, target_ext):
         raise ValueError("Invalid quality")
 
@@ -151,7 +151,7 @@ def convertFLAC(audio_path: Path,
 
 def convertOGG(audio_path: Path,
                target_ext: Literal["flac", "wav", "mp3"],
-               quality: int| None = None) -> None:
+               quality: int|None = None) -> None:
     if not is_quality_valid(quality, target_ext):
         raise ValueError("Invalid quality")
 
@@ -289,7 +289,7 @@ def convertOGG(audio_path: Path,
 
 def convertWAV(audio_path: Path,
                target_ext: Literal["flac", "ogg", "mp3"],
-               quality: int| None = None) -> None:
+               quality: int|None = None) -> None:
     if not is_quality_valid(quality, target_ext):
         raise ValueError("Invalid quality")
 
@@ -361,78 +361,74 @@ def get_mp3_pic_data(source_path: Path) -> list[Picture]:
     return pictures
 
 
-def MP3toFLAC(audio_path: Path, ignore_arg = None) -> None:
-    new_filepath = audio_path.with_suffix(".flac")
-    print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "flac",
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
-
-    pictures = get_mp3_pic_data(audio_path)
-    target = FLAC(new_filepath)
-    target.clear_pictures()
-
-    for picture in pictures:
-        target.add_picture(picture)
-    target.save()
-
-
-def MP3toOGG(audio_path: Path, quality: int) -> None:
-    if not is_quality_valid(quality, "ogg"):
+def convertMP3(audio_path: Path,
+               target_ext: Literal["flac", "ogg", "wav"],
+               quality: int|None = None) -> None:
+    if not is_quality_valid(quality, target_ext):
         raise ValueError("Invalid quality")
 
-    new_filepath = audio_path.with_suffix(".ogg")
+    new_filepath = audio_path.with_suffix(f".{target_ext}")
     print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "libvorbis",
-            "-q:a", str(quality),
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
 
-    pictures = get_mp3_pic_data(audio_path)
-    target = OggVorbis(new_filepath)
-    key = "METADATA_BLOCK_PICTURE"
-    if key in target:
-        del target[key]
+    if target_ext == "flac":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "flac",
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
 
-    target[key] = [
-        base64.b64encode(picture.write()).decode("ascii")
-        for picture in pictures]
-    target.save()
+        pictures = get_mp3_pic_data(audio_path)
+        target = FLAC(new_filepath)
+        target.clear_pictures()
 
+        for picture in pictures:
+            target.add_picture(picture)
+        target.save()
+    elif target_ext == "ogg":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "libvorbis",
+                "-q:a", str(quality),
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
 
-def MP3toWAV(audio_path: Path, ignore_arg = None) -> None:
-    new_filepath = audio_path.with_suffix(".wav")
-    print("Converting:", audio_path.name)
-    try:
-        subprocess.run([
-            "ffmpeg",
-            "-i", str(audio_path),
-            "-map", "0:a:0",
-            "-map_metadata", "0",
-            "-c:a", "pcm_s16le",
-            "-y", str(new_filepath)],
-        check=True,
-        capture_output=True,
-        text=True)
-    except Exception as e:
-        raise Exception(e)
+        pictures = get_mp3_pic_data(audio_path)
+        target = OggVorbis(new_filepath)
+        key = "METADATA_BLOCK_PICTURE"
+        if key in target:
+            del target[key]
+
+        target[key] = [
+            base64.b64encode(picture.write()).decode("ascii")
+            for picture in pictures]
+        target.save()
+    elif target_ext == "wav":
+        try:
+            subprocess.run([
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-map", "0:a:0",
+                "-map_metadata", "0",
+                "-c:a", "pcm_s16le",
+                "-y", str(new_filepath)],
+            check=True,
+            capture_output=True,
+            text=True)
+        except Exception as e:
+            raise Exception(e)
