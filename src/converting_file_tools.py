@@ -78,6 +78,7 @@ def is_quality_valid(quality: int, extension: Literal["flac", "ogg", "wav", "mp3
         return False
     if extension == "mp3" and quality > 9:
         return False
+    return True
 
 
 def FLACtoOGG(audio_path: Path, quality: int) -> None:
